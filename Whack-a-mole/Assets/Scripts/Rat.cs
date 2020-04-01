@@ -27,9 +27,13 @@ public class Rat : MonoBehaviour
     [HideInInspector]
     public bool beginMovingDown;
 
+    [Range(-100, 100)]
+    public int givesScoreOf;
+
     int prevTime;
     bool setHitTime;
     int timeAfterHit;
+    bool addedScore;
 
     void FixedUpdate()
     {
@@ -56,33 +60,36 @@ public class Rat : MonoBehaviour
         {
             MoveUp();
         }
-        if(doneMovingUp && !beginMovingDown)
+        if (doneMovingUp && !beginMovingDown)
         {
             canBeHit = true;
         }
-        if(doneMovingUp && Mathf.FloorToInt(Time.time) - prevTime >= timeThere && !beginMovingDown)
+        if (doneMovingUp && Mathf.FloorToInt(Time.time) - prevTime >= timeThere && !beginMovingDown)
         {
             MoveDown();
         }
-        if(beginMovingUp)
+        if (beginMovingUp)
         {
             canBeHit = false;
             isHit = false;
-                if (newPos == 0) newPos = transform.position.y + 1.52f;
-                if (transform.position == new Vector3(transform.position.x, newPos))
-                {
-                    doneMovingUp = true;
-                    beginMovingUp = false;
-                    newPos = 0;
+            if (newPos == 0) newPos = transform.position.y + 1.52f;
+            if (transform.position == new Vector3(transform.position.x, newPos))
+            {
+                doneMovingUp = true;
+                beginMovingUp = false;
+                newPos = 0;
                 return;
-                }
-                transform.position = new Vector2(transform.position.x, Mathf.Lerp(transform.position.y, newPos, speed));
+            }
+            transform.position = new Vector2(transform.position.x, Mathf.Lerp(transform.position.y, newPos, speed));
         }
-        if(beginMovingDown)
+        if (beginMovingDown)
         {
             if (newPos == 0) newPos = transform.position.y - 1.52f;
             if (transform.position == new Vector3(transform.position.x, newPos))
             {
+                addedScore = false;
+                timerHasStarted = false;
+                timeAfterHit = 0;
                 transform.position = initialPos;
                 beginMovingDown = false;
                 timerHasStarted = false;
@@ -103,9 +110,8 @@ public class Rat : MonoBehaviour
         }
         if (isHit && setHitTime && canBeHit)
         {
-            Debug.Log("Ahoy Hoy");
             GetComponent<Animator>().SetTrigger("Damage");
-            gameController.score++;
+            if (!addedScore) gameController.score += givesScoreOf;
             canBeHit = false;
             beginMovingUp = false;
             IEnumerator coroutine = Hit(Mathf.FloorToInt(Time.time) - Mathf.FloorToInt(timeAfterHit));

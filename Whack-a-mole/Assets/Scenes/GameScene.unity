@@ -1205,6 +1205,7 @@ MonoBehaviour:
   doneMovingUp: 0
   doneAnim: 1
   beginMovingDown: 0
+  givesScoreOf: 50
 --- !u!61 &1681666640
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1355,6 +1356,7 @@ MonoBehaviour:
   doneMovingUp: 0
   doneAnim: 1
   beginMovingDown: 0
+  givesScoreOf: 30
 --- !u!61 &1846083389
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1422,6 +1424,7 @@ MonoBehaviour:
   doneMovingUp: 0
   doneAnim: 1
   beginMovingDown: 0
+  givesScoreOf: 10
 --- !u!95 &2036443735
 Animator:
   serializedVersion: 3
