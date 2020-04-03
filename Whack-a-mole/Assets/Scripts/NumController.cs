@@ -10,6 +10,7 @@ public class NumController : MonoBehaviour
 
     Animator animLeft;
     Animator animRight;
+    EndScene endScene;
 
     public RatController rc;
     public GameController gc;
@@ -30,6 +31,7 @@ public class NumController : MonoBehaviour
 
         animLeft = timeLeft.GetComponent<Animator>();
         animRight = timeRight.GetComponent<Animator>();
+        endScene = GameObject.Find("EndScene").GetComponent<EndScene>();
 
         animLeft.Play("Num" + Mathf.FloorToInt(howMuchTime / 10));
         animRight.Play("Num" + (howMuchTime - (Mathf.FloorToInt(howMuchTime / 10) * 10)));
@@ -55,6 +57,7 @@ public class NumController : MonoBehaviour
                 gameDone = true;
                 animLeft.StopPlayback();
                 animRight.StopPlayback();
+                endScene.End();
             }
         }
     }

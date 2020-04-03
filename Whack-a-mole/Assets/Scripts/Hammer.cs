@@ -38,7 +38,6 @@ public class Hammer : MonoBehaviour
             {
                 if (_collider)
                 {
-                    Debug.Log(_collider.name);
                     Rat _rat = _collider.gameObject.GetComponent<Rat>();
                     if (_rat != null)
                         if (_rat.canBeHit && _rat.doneMovingUp && !_rat.beginMovingDown)

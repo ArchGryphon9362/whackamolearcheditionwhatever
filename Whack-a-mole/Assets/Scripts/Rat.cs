@@ -99,7 +99,7 @@ public class Rat : MonoBehaviour
                 newPos = 0.0f;
                 doneMovingUp = false;
                 prevTime = 0;
-                GetComponent<Animator>().SetTrigger("End");
+                //GetComponent<Animator>().SetTrigger("End");
             }
             transform.position = new Vector2(transform.position.x, Mathf.Lerp(transform.position.y, newPos, speed));
         }
@@ -108,10 +108,11 @@ public class Rat : MonoBehaviour
             timeAfterHit = Mathf.FloorToInt(Time.time);
             setHitTime = true;
         }
-        if (isHit && setHitTime && canBeHit)
+        if (isHit && canBeHit)
         {
-            GetComponent<Animator>().SetTrigger("Damage");
+            //GetComponent<Animator>().SetTrigger("Damage");
             if (!addedScore) gameController.score += givesScoreOf;
+            addedScore = true;
             canBeHit = false;
             beginMovingUp = false;
             IEnumerator coroutine = Hit(Mathf.FloorToInt(Time.time) - Mathf.FloorToInt(timeAfterHit));

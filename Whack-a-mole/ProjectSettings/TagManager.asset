@@ -53,3 +53,6 @@ TagManager:
   - name: Hammer
     uniqueID: 4278876769
     locked: 0
+  - name: EndScene
+    uniqueID: 2619773897
+    locked: 0
